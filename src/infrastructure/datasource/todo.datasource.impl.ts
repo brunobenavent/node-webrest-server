@@ -2,10 +2,6 @@ import { prisma } from '../../data/postgres';
 import { CreateTodoDto, TodoDatasource, TodoEntity, UpdateTodoDto } from '../../domain';
 
 
-
-
-
-
 export class TodoDatasourceImpl implements TodoDatasource {
     async create(createTodoDto: CreateTodoDto): Promise<TodoEntity> {
         const todo = await prisma.todo.create({
@@ -16,8 +12,8 @@ export class TodoDatasourceImpl implements TodoDatasource {
     async getAll(): Promise<TodoEntity[]> {
         const todos = await prisma.todo.findMany();
         return todos.map(todo => TodoEntity.fromObject(todo));
-
     }
+
     async findById(id: number): Promise<TodoEntity> {
         const todo = await prisma.todo.findFirst({
             where: { id }
